@@ -23,7 +23,7 @@ const Product = ({
   };
 
   return (
-    <div className="border p-4 bg-gray-200 rounded">
+    <div className="flex flex-col gap-2 justify-center items-center p-4 bg-gray-200 rounded">
       <h3 className="text-3xl font-bold">{name}</h3>
       <div className="p-2">
         <img src={image} alt={name} className="w-full object-cover" />
