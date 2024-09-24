@@ -1,8 +1,12 @@
+import { Toaster } from "react-hot-toast";
+import ProductScreen from "./screens/ProductScreen";
+
 const App = () => {
   return (
-    <>
-      <h1 className="text-4xl underline">Vishal Kumawat </h1>
-    </>
+    <div>
+      <Toaster position="top-right" reverseOrder={false} />
+      <ProductScreen />
+    </div>
   );
 };
 
