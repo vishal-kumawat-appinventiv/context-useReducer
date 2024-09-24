@@ -7,11 +7,7 @@ const getInitialCartState = () => {
 };
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(
-    cartReducer,
-    initialState,
-    getInitialCartState
-  );
+  const [state, dispatch] = useReducer(cartReducer, getInitialCartState());
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(state.cartItems));
