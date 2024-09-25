@@ -14,9 +14,13 @@ const CartScreen = () => {
     toast.success("Item removed from cart");
   };
 
-  const handleQuantityChange = (id: number, quantity: number) => {
+  const handleQuantityChange = (
+    id: number,
+    quantity: number,
+    index: number
+  ) => {
     if (quantity < 1) return;
-    dispatch({ type: UPDATE_QUANTITY, payload: { id, quantity } });
+    dispatch({ type: UPDATE_QUANTITY, payload: { id, quantity, index } });
   };
 
   return (
@@ -28,7 +32,7 @@ const CartScreen = () => {
       {state.cartItems.length > 0 ? (
         <div>
           <ul>
-            {state.cartItems.map((item) => (
+            {state.cartItems.map((item, index) => (
               <div
                 key={item.id}
                 className="flex items-center bg-gray-200 gap-5 rounded mb-4"
@@ -50,7 +54,11 @@ const CartScreen = () => {
                       <button
                         className="bg-gray-400 px-2 py-1 rounded"
                         onClick={() =>
-                          handleQuantityChange(item.id, item.quantity - 1)
+                          handleQuantityChange(
+                            item.id,
+                            item.quantity - 1,
+                            index
+                          )
                         }
                       >
                         <i className="bi bi-dash text-2xl"></i>
@@ -59,7 +67,11 @@ const CartScreen = () => {
                       <button
                         className="bg-gray-400 px-2 py-1 rounded"
                         onClick={() =>
-                          handleQuantityChange(item.id, item.quantity + 1)
+                          handleQuantityChange(
+                            item.id,
+                            item.quantity + 1,
+                            index
+                          )
                         }
                       >
                         <i className="bi bi-plus text-2xl"></i>

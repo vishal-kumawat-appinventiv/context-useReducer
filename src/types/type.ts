@@ -13,5 +13,8 @@ export interface CartState {
 export type ActionType =
   | { type: "ADD_ITEM"; payload: CartItem }
   | { type: "REMOVE_ITEM"; payload: number }
-  | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
+  | {
+      type: "UPDATE_QUANTITY";
+      payload: { id: number; quantity: number; index: number };
+    }
   | { type: "CLEAR_CART" };

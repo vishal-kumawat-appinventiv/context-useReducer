@@ -36,12 +36,15 @@ export const cartReducer = (
       };
     }
     case UPDATE_QUANTITY: {
-      const itemIdx = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
-      const newCartItems = [...state.cartItems];
-      newCartItems[itemIdx].quantity = action.payload.quantity;
-      return { ...state, cartItems: newCartItems };
+      // const itemIdx = state.cartItems.findIndex(
+      //   (item) => item.id === action.payload.id
+      // );
+      // const newCartItems = [...state.cartItems];
+      // newCartItems[itemIdx].quantity = action.payload.quantity;
+      // return { ...state, cartItems: newCartItems };
+      const temp = state.cartItems.slice();
+      temp[action.payload.index].quantity = action.payload.quantity;
+      return { ...state, cartItems: temp };
     }
     case CLEAR_CART: {
       return { ...state, cartItems: [] };
