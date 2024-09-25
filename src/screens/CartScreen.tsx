@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext";
+import { REMOVE_ITEM, UPDATE_QUANTITY } from "../utils/constant";
 
 const CartScreen = () => {
   const { state, dispatch } = useCart();
@@ -9,13 +10,13 @@ const CartScreen = () => {
   );
 
   const handleRemove = (id: number) => {
-    dispatch({ type: "REMOVE_ITEM", payload: id });
+    dispatch({ type: REMOVE_ITEM, payload: id });
     toast.success("Item removed from cart");
   };
 
   const handleQuantityChange = (id: number, quantity: number) => {
     if (quantity < 1) return;
-    dispatch({ type: "UPDATE_QUANTITY", payload: { id, quantity } });
+    dispatch({ type: UPDATE_QUANTITY, payload: { id, quantity } });
   };
 
   return (

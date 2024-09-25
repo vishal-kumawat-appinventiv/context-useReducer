@@ -1,5 +1,6 @@
 import toast from "react-hot-toast";
 import { useCart } from "../context/CartContext";
+import { ADD_ITEM } from "../utils/constant";
 
 const Product = ({
   id,
@@ -16,7 +17,7 @@ const Product = ({
 
   const handleAddToCart = () => {
     dispatch({
-      type: "ADD_ITEM",
+      type: ADD_ITEM,
       payload: { id, name, price, quantity: 1, image },
     });
     toast.success("Item added to cart");

@@ -1,22 +1,22 @@
 import React, { createContext, useContext } from "react";
-import { CartItem, CartState } from "../types/type";
+import { ActionType, CartState } from "../types/type";
+import {
+  ADD_ITEM,
+  CLEAR_CART,
+  REMOVE_ITEM,
+  UPDATE_QUANTITY,
+} from "../utils/constant";
 
 export const initialState: CartState = {
   cartItems: [],
 };
-
-type ActionType =
-  | { type: "ADD_ITEM"; payload: CartItem }
-  | { type: "REMOVE_ITEM"; payload: number }
-  | { type: "UPDATE_QUANTITY"; payload: { id: number; quantity: number } }
-  | { type: "CLEAR_CART" };
 
 export const cartReducer = (
   state: CartState,
   action: ActionType
 ): CartState => {
   switch (action.type) {
-    case "ADD_ITEM": {
+    case ADD_ITEM: {
       const itemExists = state.cartItems.find(
         (item) => item.id === action.payload.id
       );
@@ -33,13 +33,13 @@ export const cartReducer = (
         return { ...state, cartItems: [...state.cartItems, action.payload] };
       }
     }
-    case "REMOVE_ITEM": {
+    case REMOVE_ITEM: {
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
       };
     }
-    case "UPDATE_QUANTITY": {
+    case UPDATE_QUANTITY: {
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
@@ -49,7 +49,7 @@ export const cartReducer = (
         ),
       };
     }
-    case "CLEAR_CART": {
+    case CLEAR_CART: {
       return { ...state, cartItems: [] };
     }
     default:
