@@ -17,18 +17,14 @@ export const cartReducer = (
 ): CartState => {
   switch (action.type) {
     case ADD_ITEM: {
-      const itemExists = state.cartItems.find(
+      const itemIdx = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-      if (itemExists) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((item) =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
-        };
+      if (itemIdx !== -1) {
+        const item = state.cartItems[itemIdx];
+        const newCartItems = [...state.cartItems];
+        newCartItems[itemIdx] = { ...item, quantity: item.quantity + 1 };
+        return { ...state, cartItems: newCartItems };
       } else {
         return { ...state, cartItems: [...state.cartItems, action.payload] };
       }
@@ -40,14 +36,12 @@ export const cartReducer = (
       };
     }
     case UPDATE_QUANTITY: {
-      return {
-        ...state,
-        cartItems: state.cartItems.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
-            : item
-        ),
-      };
+      const itemIdx = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      const newCartItems = [...state.cartItems];
+      newCartItems[itemIdx].quantity = action.payload.quantity;
+      return { ...state, cartItems: newCartItems };
     }
     case CLEAR_CART: {
       return { ...state, cartItems: [] };
